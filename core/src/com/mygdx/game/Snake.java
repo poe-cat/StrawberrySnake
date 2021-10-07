@@ -33,6 +33,13 @@ public class Snake {
         snakeParts.add(new GridPoint2(30, 30));
     }
 
+    //snake'ssss sneaky moves
+    public void act(float deltaTime) {
+
+    }
+
+
+
     //drawing snake body (adding his "parts" to snakeParts ArrayList)
     public void draw(Batch batch) {
 
