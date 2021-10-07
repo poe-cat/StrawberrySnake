@@ -6,15 +6,23 @@ import com.badlogic.gdx.math.GridPoint2;
 import java.util.ArrayList;
 import java.util.List;
 
+//snake movements directions
+enum MovementDirection {
+    LEFT, UP, RIGHT, DOWN
+}
 
 public class Snake {
 
     private final Texture texture;
     private final List<GridPoint2> snakeParts;
+    private MovementDirection direction;
 
     public Snake(Texture texture) {
 
         this.texture = texture;
+
+        //default movement direction: up
+        direction = MovementDirection.UP;
 
         snakeParts = new ArrayList<>();
 
