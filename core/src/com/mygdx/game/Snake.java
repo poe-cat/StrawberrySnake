@@ -77,29 +77,40 @@ public class Snake {
 
     private void move() {
 
+        //move all body parts except the head
         for(int i = snakeParts.size() - 1; i > 0; i--) { //setting snake body part position to next part position
-            snakeParts.get(i).set(snakeParts.get(i - 1)); //each snake part is moving on (except the first one)
+            snakeParts.get(i).set(snakeParts.get(i - 1));
         }
 
-        //moving the head (first body part)
+        //moving head
+        int partWidth = texture.getWidth();
+        int partHeight = texture.getWidth();
+
+        //position X and Y of the last snake part against upper and right window's edge
+        int lastWindowPartX = Gdx.graphics.getWidth() - partWidth;
+        int lastWindowPartY = Gdx.graphics.getHeight() - partHeight;
+
         GridPoint2 head = snakeParts.get(0);
 
-            //changing direction
-            switch (direction) {
-                case LEFT:
-                    head.x -= texture.getWidth();
-                    break;
-                case UP:
-                    head.y += texture.getHeight();
-                    break;
-                case RIGHT:
-                    head.x += texture.getWidth();
-                    break;
-                case DOWN:
-                    head.y -= texture.getHeight();
-                    break;
-            }
+        //Changing direction and handle window edges.
+        //ex: if the snake's head is at the left edge of the window,
+        //then the x coordinate has the value 0.
+        //If so, set this coordinate to the calculated value lastWindowPartX.
+        switch(direction) {
+            case LEFT:
+                head.x = (head.x == 0) ? lastWindowPartX : head.x - partWidth;
+                break;
+            case UP:
+                head.y = (head.y == lastWindowPartY) ? 0 : head.y + partHeight;
+                break;
+            case RIGHT:
+                head.x = (head.x == lastWindowPartX) ? 0 : head.x + partWidth;
+                break;
+            case DOWN:
+                head.y = (head.y == 0) ? lastWindowPartY : head.y - partHeight;
+                break;
         }
+    }
 
     //drawing snake body (adding his "parts" to snakeParts ArrayList)
     public void draw(Batch batch) {
