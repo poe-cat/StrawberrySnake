@@ -29,6 +29,7 @@ public class Snake {
 
         snakeParts = new ArrayList<>();
 
+        //snake parts positions
         snakeParts.add(new GridPoint2(90, 30));
         snakeParts.add(new GridPoint2(75, 30));
         snakeParts.add(new GridPoint2(60, 30));
