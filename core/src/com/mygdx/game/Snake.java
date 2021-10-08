@@ -37,20 +37,30 @@ public class Snake {
     //snake'ssss sneaky moves
     public void act(float deltaTime) {
 
-        /*
-        When the value of the timeElapsedSinceLastMove
+        /* When the value of the timeElapsedSinceLastMove
         exceeds the set value 100 milliseconds,
-        snake will move and we reset value of timeElapsed...
-         */
+        snake will move and we reset value of timeElapsed...*/
+
+        timeElapsedSinceLastMove += deltaTime;
+
         if (timeElapsedSinceLastMove >= 0.1) {
             timeElapsedSinceLastMove = 0;
+            move();
+        }
+    }
 
-            for (int i = snakeParts.size() - 1; i > 0; i--) { //setting snake body part position to next part position
-                snakeParts.get(i).set(snakeParts.get(i - 1)); //each snake part is moving on (except the first one)
-            }
+    private void handleDirectionChange() {
 
-            //moving the head (first body part)
-            GridPoint2 head = snakeParts.get(0);
+    }
+
+    private void move() {
+
+        for(int i = snakeParts.size() - 1; i > 0; i--) { //setting snake body part position to next part position
+            snakeParts.get(i).set(snakeParts.get(i - 1)); //each snake part is moving on (except the first one)
+        }
+
+        //moving the head (first body part)
+        GridPoint2 head = snakeParts.get(0);
 
             //changing direction
             switch (direction) {
@@ -68,7 +78,7 @@ public class Snake {
                     break;
             }
         }
-    }
+
 
 
 
