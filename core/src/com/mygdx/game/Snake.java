@@ -34,8 +34,30 @@ public class Snake {
     }
 
     //snake'ssss sneaky moves
-    public void act(float deltaTime) {
+    public void act() {
 
+        for (int i = snakeParts.size() - 1; i > 0; i--) { //setting snake body part position to next part position
+            snakeParts.get(i).set(snakeParts.get(i - 1)); //each snake part is moving on (except the first one)
+        }
+
+        //moving the head (first body part)
+        GridPoint2 head = snakeParts.get(0);
+
+        //changing direction
+        switch(direction) {
+            case LEFT:
+                head.x -= texture.getWidth();
+                break;
+            case UP:
+                head.y += texture.getHeight();
+                break;
+            case RIGHT:
+                head.x += texture.getWidth();
+                break;
+            case DOWN:
+                head.y -= texture.getHeight();
+                break;
+        }
     }
 
 
