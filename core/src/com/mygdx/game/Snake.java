@@ -16,6 +16,7 @@ public class Snake {
     private final Texture texture;
     private final List<GridPoint2> snakeParts;
     private MovementDirection direction;
+    private float timeElapsedSinceLastMove; //moves timing
 
     public Snake(Texture texture) {
 
@@ -34,29 +35,38 @@ public class Snake {
     }
 
     //snake'ssss sneaky moves
-    public void act() {
+    public void act(float deltaTime) {
 
-        for (int i = snakeParts.size() - 1; i > 0; i--) { //setting snake body part position to next part position
-            snakeParts.get(i).set(snakeParts.get(i - 1)); //each snake part is moving on (except the first one)
-        }
+        /*
+        When the value of the timeElapsedSinceLastMove
+        exceeds the set value 100 milliseconds,
+        snake will move and we reset value of timeElapsed...
+         */
+        if (timeElapsedSinceLastMove >= 0.1) {
+            timeElapsedSinceLastMove = 0;
 
-        //moving the head (first body part)
-        GridPoint2 head = snakeParts.get(0);
+            for (int i = snakeParts.size() - 1; i > 0; i--) { //setting snake body part position to next part position
+                snakeParts.get(i).set(snakeParts.get(i - 1)); //each snake part is moving on (except the first one)
+            }
 
-        //changing direction
-        switch(direction) {
-            case LEFT:
-                head.x -= texture.getWidth();
-                break;
-            case UP:
-                head.y += texture.getHeight();
-                break;
-            case RIGHT:
-                head.x += texture.getWidth();
-                break;
-            case DOWN:
-                head.y -= texture.getHeight();
-                break;
+            //moving the head (first body part)
+            GridPoint2 head = snakeParts.get(0);
+
+            //changing direction
+            switch (direction) {
+                case LEFT:
+                    head.x -= texture.getWidth();
+                    break;
+                case UP:
+                    head.y += texture.getHeight();
+                    break;
+                case RIGHT:
+                    head.x += texture.getWidth();
+                    break;
+                case DOWN:
+                    head.y -= texture.getHeight();
+                    break;
+            }
         }
     }
 
