@@ -49,9 +49,7 @@ public class Snake {
         }
     }
 
-    private void handleDirectionChange() {
 
-    }
 
     private void move() {
 
