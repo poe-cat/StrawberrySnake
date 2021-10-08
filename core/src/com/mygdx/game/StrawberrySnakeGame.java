@@ -22,8 +22,11 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
+		snake.act();
+
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		batch.begin();
 		//drawing snake
 		snake.draw(batch);
