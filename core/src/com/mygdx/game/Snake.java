@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
@@ -37,6 +39,8 @@ public class Snake {
     //snake'ssss sneaky moves
     public void act(float deltaTime) {
 
+
+
         /* When the value of the timeElapsedSinceLastMove
         exceeds the set value 100 milliseconds,
         snake will move and we reset value of timeElapsed...*/
@@ -49,10 +53,27 @@ public class Snake {
         }
     }
 
+    //handling direction change and blocking snake's "eating himself backward"
+    //ex: if he's going down, he can't go up
     private void handleDirectionChange() {
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) &&
+                direction != MovementDirection.RIGHT) {
+            direction = MovementDirection.LEFT;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) &&
+                direction != MovementDirection.LEFT) {
+            direction = MovementDirection.RIGHT;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) &&
+                direction != MovementDirection.DOWN) {
+            direction = MovementDirection.UP;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) &&
+                direction != MovementDirection.UP) {
+            direction = MovementDirection.DOWN;
+        }
     }
-
 
     private void move() {
 
@@ -79,9 +100,6 @@ public class Snake {
                     break;
             }
         }
-
-
-
 
     //drawing snake body (adding his "parts" to snakeParts ArrayList)
     public void draw(Batch batch) {
