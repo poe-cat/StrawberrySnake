@@ -39,7 +39,7 @@ public class Snake {
     //snake'ssss sneaky moves
     public void act(float deltaTime) {
 
-
+        handleDirectionChange();
 
         /* When the value of the timeElapsedSinceLastMove
         exceeds the set value 100 milliseconds,
