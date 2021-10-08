@@ -14,6 +14,7 @@ public class Strawberry {
         this.position = new GridPoint2();
     }
 
+    //draw strawberry
     public void draw(Batch batch) {
         batch.draw(texture, position.x, position.y);
     }
