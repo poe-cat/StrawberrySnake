@@ -16,6 +16,8 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	private Snake snake;
 	private Strawberry strawberry;
 
+	private boolean gameOver;
+
 
 	@Override
 	public void create() {
