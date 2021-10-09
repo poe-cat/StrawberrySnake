@@ -65,7 +65,7 @@ public class Snake {
         snakeParts.add(new GridPoint2(snakeParts.get(snakeParts.size() - 1)));
     }
 
-    //collision with himself
+    //collision with himself -> if true, gameOver
     public boolean isHeUroboros() {
         for(int i = 1; i < snakeParts.size(); i++) {
             if(snakeParts.get(i).equals(snakeHead())) {
