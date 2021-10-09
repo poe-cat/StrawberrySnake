@@ -41,16 +41,18 @@ public class Snake {
     //snake'ssss sneaky moves
     public void act(float deltaTime) {
 
-        handleDirectionChange();
+        if(canChangeDirection) {
+            handleDirectionChange();
+        } //if not, he won't move
 
         /* When the value of the timeElapsedSinceLastMove
         exceeds the set value 100 milliseconds,
         snake will move and we reset value of timeElapsed...*/
-
         timeElapsedSinceLastMove += deltaTime;
 
         if (timeElapsedSinceLastMove >= 0.1) {
             timeElapsedSinceLastMove = 0;
+            canChangeDirection = true; //true if snake's already moved
             move();
         }
     }
