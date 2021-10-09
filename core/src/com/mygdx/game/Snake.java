@@ -19,6 +19,7 @@ public class Snake {
     private final List<GridPoint2> snakeParts;
     private MovementDirection direction;
     private float timeElapsedSinceLastMove; //moves timing
+    private boolean canChangeDirection; //can change direction if has changed already
 
     public Snake(Texture texture) {
 
