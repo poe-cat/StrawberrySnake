@@ -60,6 +60,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 			if (snake.isHeUroboros()) {
 				gameOver = true;
+				System.out.println("GAME OVER");
 			}
 		}
 	}
