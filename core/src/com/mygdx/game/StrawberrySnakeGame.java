@@ -11,13 +11,20 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 	private SpriteBatch batch;
 	private Texture snakeImg;
+	private Texture strawImg;
+
 	private Snake snake;
+	private Strawberry strawberry;
+
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
 		snakeImg = new Texture("snake.png");
+		strawImg = new Texture("straw.png");
+
 		snake = new Snake(snakeImg);
+		strawberry = new Strawberry(strawImg);
 	}
 
 	@Override
@@ -28,15 +35,20 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		//drawing snake
+
+		//drawing snake and strawberry
 		snake.draw(batch);
+		strawberry.draw(batch);
+
 		batch.end();
 	}
 
 	@Override
 	public void dispose() {
 		batch.dispose();
-		//release texture (snake is moving on)
+
+		//release texture (snake is moving on, strawberry is eaten)
 		snakeImg.dispose();
+		strawImg.dispose();
 	}
 }
