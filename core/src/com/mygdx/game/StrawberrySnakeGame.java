@@ -12,11 +12,11 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Texture snakeImg;
 	private Texture strawImg;
-	private Texture deadImg;
+	//private Texture deadImg;
 
 	private Snake snake;
 	private Strawberry strawberry;
-	private Dead dead;
+	//private Dead dead;
 
 	private boolean gameOver;
 
@@ -26,11 +26,11 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		snakeImg = new Texture("snake.png");
 		strawImg = new Texture("straw2.png");
-		deadImg = new Texture("gameover.gif");
+		//deadImg = new Texture("gameover.gif");
 
 		snake = new Snake(snakeImg);
 		strawberry = new Strawberry(strawImg);
-		dead = new Dead(deadImg);
+		//dead = new Dead(deadImg);
 
 	}
 
@@ -57,7 +57,8 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		if (!gameOver) {
 			snake.act(Gdx.graphics.getDeltaTime());
 
-			//if head has the same pos as strawberry, snake extends and new food randomly appears
+			//if head has the same pos as strawberry,
+			// snake extends and new food randomly appears
 			if (snake.isStrawAboard(strawberry.getPosition())) {
 				snake.extendSnake();
 				strawberry.randomizeFoodPos();
