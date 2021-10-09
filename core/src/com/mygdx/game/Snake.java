@@ -65,6 +65,16 @@ public class Snake {
         snakeParts.add(new GridPoint2(snakeParts.get(snakeParts.size() - 1)));
     }
 
+    //collision with himself
+    public boolean isHeUroboros() {
+        for(int i = 1; i < snakeParts.size(); i++) {
+            if(snakeParts.get(i).equals(snakeHead())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     //handling direction change and blocking snake's "eating himself backward"
     //ex: if he's going down, he can't go up
