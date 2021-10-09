@@ -59,6 +59,12 @@ public class Snake {
         return snakeParts.get(0).equals(strawPosition);
     }
 
+    //adding new snake parts
+    public void extendSnake() {
+        //position of the new one is set to the position of the currently last part
+        snakeParts.add(new GridPoint2(snakeParts.get(snakeParts.size() - 1)));
+    }
+
 
     //handling direction change and blocking snake's "eating himself backward"
     //ex: if he's going down, he can't go up
