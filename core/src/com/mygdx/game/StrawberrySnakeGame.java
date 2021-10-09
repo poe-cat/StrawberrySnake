@@ -21,7 +21,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	public void create() {
 		batch = new SpriteBatch();
 		snakeImg = new Texture("snake.png");
-		strawImg = new Texture("straw.png");
+		strawImg = new Texture("straw2.png");
 
 		snake = new Snake(snakeImg);
 		strawberry = new Strawberry(strawImg);
