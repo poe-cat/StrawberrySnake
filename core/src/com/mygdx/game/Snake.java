@@ -56,7 +56,7 @@ public class Snake {
 
     //check head's position if it's the same as strawberry's
     public boolean isStrawAboard(GridPoint2 strawPosition) {
-        return snakeParts.get(0).equals(strawPosition);
+        return snakeHead().equals(strawPosition);
     }
 
     //adding new snake parts
@@ -103,7 +103,8 @@ public class Snake {
         int lastWindowPartX = Gdx.graphics.getWidth() - partWidth;
         int lastWindowPartY = Gdx.graphics.getHeight() - partHeight;
 
-        GridPoint2 head = snakeParts.get(0);
+        //instead of using "snakeParts.get(0)" as head reference
+        GridPoint2 head = snakeHead();
 
         //Changing direction and handle window edges.
         //ex: if the snake's head is at the left edge of the window,
@@ -131,5 +132,10 @@ public class Snake {
         for (GridPoint2 pos : snakeParts) {
             batch.draw(texture, pos.x, pos.y);
         }
+    }
+
+    //as separate method for snake's head position
+    private GridPoint2 snakeHead() {
+        return snakeParts.get(0);
     }
 }
