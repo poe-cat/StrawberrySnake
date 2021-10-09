@@ -54,6 +54,12 @@ public class Snake {
         }
     }
 
+    //check head's position if it's the same as strawberry's
+    public boolean isStrawAboard(GridPoint2 strawPosition) {
+        return snakeParts.get(0).equals(strawPosition);
+    }
+
+
     //handling direction change and blocking snake's "eating himself backward"
     //ex: if he's going down, he can't go up
     private void handleDirectionChange() {
