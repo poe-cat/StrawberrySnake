@@ -31,13 +31,8 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		snake.act(Gdx.graphics.getDeltaTime());
 
-		//if head has the same pos as strawberry, snake extends and new food randomly appears
-		if(snake.isStrawAboard(strawberry.getPosition())) {
-			snake.extendSnake();
-			strawberry.randomizeFoodPos();
-		}
+		runningGame();
 
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -49,6 +44,24 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		strawberry.draw(batch);
 
 		batch.end();
+	}
+
+	//game logic
+	private void runningGame() {
+
+		if (!gameOver) {
+			snake.act(Gdx.graphics.getDeltaTime());
+
+			//if head has the same pos as strawberry, snake extends and new food randomly appears
+			if (snake.isStrawAboard(strawberry.getPosition())) {
+				snake.extendSnake();
+				strawberry.randomizeFoodPos();
+			}
+
+			if (snake.isHeUroboros()) {
+				gameOver = true;
+			}
+		}
 	}
 
 	@Override
