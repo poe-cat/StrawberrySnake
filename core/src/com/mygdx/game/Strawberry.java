@@ -38,5 +38,7 @@ public class Strawberry {
         );
     }
 
-
+    public GridPoint2 getPosition() {
+        return this.position;
+    }
 }
