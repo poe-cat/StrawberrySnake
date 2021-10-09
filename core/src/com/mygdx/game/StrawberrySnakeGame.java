@@ -31,6 +31,12 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	public void render() {
 		snake.act(Gdx.graphics.getDeltaTime());
 
+		//if head has the same pos as strawberry, snake extends and new food randomly appears
+		if(snake.isStrawAboard(strawberry.getPosition())) {
+			snake.extendSnake();
+			strawberry.randomizeFoodPos();
+		}
+
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
