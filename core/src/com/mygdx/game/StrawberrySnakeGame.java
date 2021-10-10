@@ -32,6 +32,13 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		strawberry = new Strawberry(strawImg);
 		//dead = new Dead(deadImg);
 
+
+	}
+
+	private void initNewGame() {
+		snake.initialize();
+		strawberry.randomizeFoodPos();
+		gameOver = false;
 	}
 
 	@Override
