@@ -13,12 +13,9 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Texture snakeImg;
 	private Texture strawImg;
-	//private Texture deadImg;
 
 	private Snake snake;
 	private Strawberry strawberry;
-	//private Dead dead;
-
 	private boolean gameOver;
 
 
@@ -27,11 +24,9 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		snakeImg = new Texture("snake.png");
 		strawImg = new Texture("straw2.png");
-		//deadImg = new Texture("gameover.gif");
 
 		snake = new Snake(snakeImg);
 		strawberry = new Strawberry(strawImg);
-		//dead = new Dead(deadImg);
 
 		initNewGame();
 	}
