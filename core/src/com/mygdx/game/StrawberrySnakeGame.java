@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
@@ -18,11 +19,20 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	private Strawberry strawberry;
 	private boolean gameOver;
 
+	private int score;
+	private String yourScoreName;
+	BitmapFont yourBitmapFontName;
+
 
 	@Override
 	public void create() {
+
+		score = 0;
+		yourScoreName = "score: 0";
+		yourBitmapFontName = new BitmapFont();
+
 		batch = new SpriteBatch();
-		snakeImg = new Texture("snakeAll.png");
+		snakeImg = new Texture("pinkSnake.png");
 		strawImg = new Texture("straw2.png");
 
 		snake = new Snake(snakeImg);
@@ -52,6 +62,11 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		snake.draw(batch);
 		strawberry.draw(batch);
 
+
+		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		yourBitmapFontName.draw(batch, yourScoreName, 25, 100);
+
+
 		batch.end();
 	}
 
@@ -65,6 +80,8 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 			// snake extends and new food randomly appears
 			if (snake.isStrawAboard(strawberry.getPosition())) {
 				snake.extendSnake();
+				score++;
+				yourScoreName = "score: " + score;
 				strawberry.randomizeFoodPos();
 			}
 
