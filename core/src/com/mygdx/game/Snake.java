@@ -38,6 +38,11 @@ public class Snake {
         snakeParts.add(new GridPoint2(30, 30));
     }
 
+    public void initialize() {
+        timeElapsedSinceLastMove = 0;
+
+    }
+
     //snake'ssss sneaky moves
     public void act(float deltaTime) {
 
