@@ -82,22 +82,29 @@ public class Snake {
     //handling direction change and blocking snake's "eating himself backward"
     //ex: if he's going down, he can't go up
     private void handleDirectionChange() {
+        //enum newDirection
+        MovementDirection newDirection = direction;
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) &&
                 direction != MovementDirection.RIGHT) {
-            direction = MovementDirection.LEFT;
+            newDirection = MovementDirection.LEFT;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) &&
                 direction != MovementDirection.LEFT) {
-            direction = MovementDirection.RIGHT;
+            newDirection = MovementDirection.RIGHT;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) &&
                 direction != MovementDirection.DOWN) {
-            direction = MovementDirection.UP;
+            newDirection = MovementDirection.UP;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) &&
                 direction != MovementDirection.UP) {
-            direction = MovementDirection.DOWN;
+            newDirection = MovementDirection.DOWN;
+        }
+
+        if (direction != newDirection) {
+            direction = newDirection;
+            canChangeDirection = false;
         }
     }
 
