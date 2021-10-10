@@ -15,11 +15,33 @@ enum MovementDirection {
 
 public class Snake {
 
+    //square size -> size of one snake part
+    private static final int PART_WIDTH = 15;
+    private static final int PART_HEIGHT = 15;
+
+    //for separate head and tail
+    private static final int TEXTURE_HEAD_START_INDEX = 0;
+    private static final int TEXTURE_TAIL_START_INDEX = 4;
+    private static final int TEXTURE_BODY_INDEX = 8;
+
+    private static final int LAST_POSSIBLE_X_POSITION
+            = Gdx.graphics.getWidth() - PART_WIDTH;
+    private static final int LAST_POSSIBLE_Y_POSITION
+            = Gdx.graphics.getHeight() - PART_HEIGHT;
+
+
+
     private final Texture texture;
     private final List<GridPoint2> snakeParts;
     private MovementDirection direction;
     private float timeElapsedSinceLastMove; //moves timing
     private boolean canChangeDirection; //can change direction if has changed already
+
+
+
+
+
+
 
     public Snake(Texture texture) {
 
@@ -38,7 +60,7 @@ public class Snake {
         snakeParts.add(new GridPoint2(30, 30));
     }
 
-    //to rebegin after game over
+    //to restart after game over
     public void initialize() {
         timeElapsedSinceLastMove = 0;
 
