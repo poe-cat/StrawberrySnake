@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.GridPoint2;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,40 +30,54 @@ public class Snake {
     private static final int LAST_POSSIBLE_Y_POSITION
             = Gdx.graphics.getHeight() - PART_HEIGHT;
 
+    private final TextureRegion[] headTexture;
+    private final TextureRegion bodyTexture;
+    private final TextureRegion[] tailTexture;
 
-
-    private final Texture texture;
     private final List<GridPoint2> snakeParts;
+
     private MovementDirection direction;
-    private float timeElapsedSinceLastMove; //moves timing
-    private boolean canChangeDirection; //can change direction if has changed already
+    private MovementDirection tailDirection;
 
-
-
-
-
+    //moves timing
+    private float timeElapsedSinceLastMove;
+    //can change direction if has changed already
+    private boolean canChangeDirection;
 
 
     public Snake(Texture texture) {
 
-        this.texture = texture;
+        //so now snake contains: head, body & tail
 
-        //default movement direction: up
-        direction = MovementDirection.UP;
+        headTexture = new TextureRegion[] {
+                getTexturePart(texture, TEXTURE_HEAD_START_INDEX),
+                getTexturePart(texture, TEXTURE_HEAD_START_INDEX + 1),
+                getTexturePart(texture, TEXTURE_HEAD_START_INDEX + 2),
+                getTexturePart(texture, TEXTURE_HEAD_START_INDEX + 3)
+        };
+
+        bodyTexture = getTexturePart(texture, TEXTURE_BODY_INDEX);
+
+        tailTexture = new TextureRegion[] {
+                getTexturePart(texture, TEXTURE_TAIL_START_INDEX),
+                getTexturePart(texture, TEXTURE_TAIL_START_INDEX + 1),
+                getTexturePart(texture, TEXTURE_TAIL_START_INDEX + 2),
+                getTexturePart(texture, TEXTURE_TAIL_START_INDEX + 3)
+        };
 
         snakeParts = new ArrayList<>();
-
-        //snake parts positions
-        snakeParts.add(new GridPoint2(90, 30));
-        snakeParts.add(new GridPoint2(75, 30));
-        snakeParts.add(new GridPoint2(60, 30));
-        snakeParts.add(new GridPoint2(45, 30));
-        snakeParts.add(new GridPoint2(30, 30));
     }
 
-    //to restart after game over
+
     public void initialize() {
+
+        //to restart after game over
+
         timeElapsedSinceLastMove = 0;
+
+        //default direction after restart
+        direction = MovementDirection.RIGHT;
+        tailDirection = MovementDirection.RIGHT;
 
         //clear ArrayList<> -> remove old snake parts
         snakeParts.clear();
@@ -75,7 +90,6 @@ public class Snake {
         snakeParts.add(new GridPoint2(30, 30));
     }
 
-    //snake'ssss sneaky moves
     public void act(float deltaTime) {
 
         if(canChangeDirection) {
@@ -92,21 +106,33 @@ public class Snake {
             canChangeDirection = true; //true if snake's already moved
             move();
         }
+
+        //
     }
 
-    //check head's position if it's the same as strawberry's
+
     public boolean isStrawAboard(GridPoint2 strawPosition) {
+
+        //check head's position if it's the same as strawberry's
+
         return snakeHead().equals(strawPosition);
     }
 
-    //adding new snake parts
+
     public void extendSnake() {
-        //position of the new one is set to the position of the currently last part
+
+        //adding new snake parts
+        //position of the new one is set
+        // to the position of the currently last part
+
         snakeParts.add(new GridPoint2(snakeParts.get(snakeParts.size() - 1)));
     }
 
-    //collision with himself -> if true, gameOver
+
     public boolean isHeUroboros() {
+
+        //collision with himself -> if true, gameOver
+
         for(int i = 1; i < snakeParts.size(); i++) {
             if(snakeParts.get(i).equals(snakeHead())) {
                 return true;
@@ -115,12 +141,44 @@ public class Snake {
         return false;
     }
 
+    public void draw(Batch batch) {
 
-    //handling direction change and blocking snake's "eating himself backward"
-    //ex: if he's going down, he can't go up
+        //draw snake's body (without head and tail)
+        for (int i = 1; i < snakeParts.size() - 1; i++) {
+            GridPoint2 body = snakeParts.get(i);
+            batch.draw(bodyTexture, body.x, body.y);
+        }
+
+        //draw snake's tail
+        GridPoint2 tail = snakeParts.get(tailIndex());
+        batch.draw(tailTexture)
+
+
+
+    }
+
+    private TextureRegion getTexturePart(Texture texture, int index) {
+
+        //image contains textures of the same size, in one row:
+        //the index argument sets which texture we want to download next
+
+        return new TextureRegion(
+                texture,
+                index * PART_WIDTH,
+                0,
+                PART_WIDTH,
+                PART_HEIGHT
+        );
+    }
+
+
     private void handleDirectionChange() {
         //enum newDirection
         MovementDirection newDirection = direction;
+
+        //handling direction change and blocking
+        // snake's "eating himself backward"
+        //ex: if he's going down, he can't go up
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) &&
                 direction != MovementDirection.RIGHT) {
@@ -148,51 +206,83 @@ public class Snake {
     private void move() {
 
         //move all body parts except the head
-        for(int i = snakeParts.size() - 1; i > 0; i--) { //setting snake body part position to next part position
+        //setting snake body part position to next part position
+        for(int i = snakeParts.size() - 1; i > 0; i--) {
             snakeParts.get(i).set(snakeParts.get(i - 1));
         }
 
-        //moving head
-        int partWidth = texture.getWidth();
-        int partHeight = texture.getWidth();
-
-        //position X and Y of the last snake part against upper and right window's edge
-        int lastWindowPartX = Gdx.graphics.getWidth() - partWidth;
-        int lastWindowPartY = Gdx.graphics.getHeight() - partHeight;
-
-        //instead of using "snakeParts.get(0)" as head reference
         GridPoint2 head = snakeHead();
 
         //Changing direction and handle window edges.
         //ex: if the snake's head is at the left edge of the window,
         //then the x coordinate has the value 0.
-        //If so, set this coordinate to the calculated value lastWindowPartX.
+        //If so, set this coordinate to the calculated value
         switch(direction) {
             case LEFT:
-                head.x = (head.x == 0) ? lastWindowPartX : head.x - partWidth;
+                head.x = (head.x == 0) ?
+                        LAST_POSSIBLE_X_POSITION : head.x - PART_WIDTH;
                 break;
             case UP:
-                head.y = (head.y == lastWindowPartY) ? 0 : head.y + partHeight;
+                head.y = (head.y == LAST_POSSIBLE_Y_POSITION)
+                        ? 0 : head.y + PART_HEIGHT;
                 break;
             case RIGHT:
-                head.x = (head.x == lastWindowPartX) ? 0 : head.x + partWidth;
+                head.x = (head.x == LAST_POSSIBLE_X_POSITION) ?
+                        0 : head.x + PART_WIDTH;
                 break;
             case DOWN:
-                head.y = (head.y == 0) ? lastWindowPartY : head.y - partHeight;
+                head.y = (head.y == 0) ?
+                        LAST_POSSIBLE_Y_POSITION : head.y - PART_HEIGHT;
                 break;
         }
     }
 
-    //drawing snake body (adding his "parts" to snakeParts ArrayList)
-    public void draw(Batch batch) {
+    private void determineTailDirection() {
+        GridPoint2 partBeforeTail = snakeParts.get(tailIndex() - 1);
+        GridPoint2 tail = snakeParts.get(tailIndex());
 
-        for (GridPoint2 pos : snakeParts) {
-            batch.draw(texture, pos.x, pos.y);
+        // 4 cases -> four window edges
+        if(tail.x == 0 &&
+                partBeforeTail.x == LAST_POSSIBLE_X_POSITION) {
+
+            tailDirection = MovementDirection.LEFT;
+
+        }else if (tail.x == LAST_POSSIBLE_X_POSITION &&
+                partBeforeTail.x == 0) {
+
+            tailDirection = MovementDirection.RIGHT;
+
+        }else if (tail.y == 0 &&
+                partBeforeTail.y == LAST_POSSIBLE_Y_POSITION) {
+
+            tailDirection = MovementDirection.DOWN;
+
+        }else if (tail.y == LAST_POSSIBLE_Y_POSITION &&
+                partBeforeTail.y == 0) {
+
+            tailDirection = MovementDirection.UP;
+
+        }
+        //checking which side of the tail (last snake part),
+        //is the one before last part
+        else if(partBeforeTail.x > tail.x) {
+            tailDirection = MovementDirection.RIGHT;
+        }else if(partBeforeTail.x < tail.x) {
+            tailDirection = MovementDirection.LEFT;
+        }else if(partBeforeTail.y > tail.y) {
+            tailDirection = MovementDirection.UP;
+        }else if(partBeforeTail.y < tail.y) {
+            tailDirection = MovementDirection.DOWN;
         }
     }
 
-    //as separate method for snake's head position
+
     private GridPoint2 snakeHead() {
         return snakeParts.get(0);
     }
+
+    private int tailIndex() {
+        return snakeParts.size() - 1;
+    }
 }
+
