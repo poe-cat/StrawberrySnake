@@ -38,9 +38,19 @@ public class Snake {
         snakeParts.add(new GridPoint2(30, 30));
     }
 
+    //to rebegin after game over
     public void initialize() {
         timeElapsedSinceLastMove = 0;
 
+        //clear ArrayList<> -> remove old snake parts
+        snakeParts.clear();
+
+        //new snake
+        snakeParts.add(new GridPoint2(90, 30));
+        snakeParts.add(new GridPoint2(75, 30));
+        snakeParts.add(new GridPoint2(60, 30));
+        snakeParts.add(new GridPoint2(45, 30));
+        snakeParts.add(new GridPoint2(30, 30));
     }
 
     //snake'ssss sneaky moves
