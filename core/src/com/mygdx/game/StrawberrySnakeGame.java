@@ -32,7 +32,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		strawberry = new Strawberry(strawImg);
 		//dead = new Dead(deadImg);
 
-
+		initNewGame();
 	}
 
 	private void initNewGame() {
