@@ -22,7 +22,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		snakeImg = new Texture("snake.png");
+		snakeImg = new Texture("snakeAll.png");
 		strawImg = new Texture("straw2.png");
 
 		snake = new Snake(snakeImg);
