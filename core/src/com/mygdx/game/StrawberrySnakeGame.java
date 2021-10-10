@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -35,6 +36,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		initNewGame();
 	}
 
+	//start new game after game over
 	private void initNewGame() {
 		snake.initialize();
 		strawberry.randomizeFoodPos();
@@ -73,7 +75,11 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 			if (snake.isHeUroboros()) {
 				gameOver = true;
-				System.out.println("GAME OVER");
+				System.out.println("GAME OVER\nPRESS ENTER TO PLAY AGAIN");
+			}
+		} else {
+			if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+				initNewGame();
 			}
 		}
 	}
