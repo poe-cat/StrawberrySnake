@@ -63,8 +63,8 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		strawberry.draw(batch);
 
 
-		yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		yourBitmapFontName.draw(batch, yourScoreName, 25, 100);
+		yourBitmapFontName.setColor(118, 140, 0, 1);
+		yourBitmapFontName.draw(batch, yourScoreName, 400, 440);
 
 
 		batch.end();
