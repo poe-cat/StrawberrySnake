@@ -12,8 +12,6 @@ public class Strawberry {
     public Strawberry(Texture texture) {
         this.texture = texture;
         this.position = new GridPoint2();
-
-        randomizeFoodPos();
     }
 
     //draw strawberry
