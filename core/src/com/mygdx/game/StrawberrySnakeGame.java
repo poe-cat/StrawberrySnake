@@ -44,6 +44,8 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	//start new game after game over
 	private void initNewGame() {
 		snake.initialize();
+		score = 0;
+		yourScoreName = "score: 0";
 		strawberry.randomizeFoodPos();
 		gameOver = false;
 	}
@@ -62,7 +64,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		snake.draw(batch);
 		strawberry.draw(batch);
 
-
+		//display score
 		yourBitmapFontName.setColor(118, 140, 0, 1);
 		yourBitmapFontName.draw(batch, yourScoreName, 400, 440);
 
