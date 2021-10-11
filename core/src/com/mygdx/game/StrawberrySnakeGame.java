@@ -20,16 +20,19 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	private boolean gameOver;
 
 	private int score;
-	private String yourScoreName;
-	BitmapFont yourBitmapFontName;
+	private String yourScore;
+	BitmapFont bitmapFont;
+
+	private String gameOverStr;
+	BitmapFont gameOverFont;
 
 
 	@Override
 	public void create() {
 
 		score = 0;
-		yourScoreName = "score: 0";
-		yourBitmapFontName = new BitmapFont();
+		yourScore = "score: 0";
+		bitmapFont = new BitmapFont();
 
 		batch = new SpriteBatch();
 		snakeImg = new Texture("pinkSnake.png");
@@ -45,7 +48,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	private void initNewGame() {
 		snake.initialize();
 		score = 0;
-		yourScoreName = "score: 0";
+		yourScore = "score: 0";
 		strawberry.randomizeFoodPos();
 		gameOver = false;
 	}
@@ -65,9 +68,8 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		strawberry.draw(batch);
 
 		//display score
-		yourBitmapFontName.setColor(118, 140, 0, 1);
-		yourBitmapFontName.draw(batch, yourScoreName, 400, 440);
-
+		bitmapFont.setColor(118, 140, 0, 1);
+		bitmapFont.draw(batch, yourScore, 400, 440);
 
 		batch.end();
 	}
@@ -83,7 +85,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 			if (snake.isStrawAboard(strawberry.getPosition())) {
 				snake.extendSnake();
 				score++;
-				yourScoreName = "score: " + score;
+				yourScore = "score: " + score;
 				strawberry.randomizeFoodPos();
 			}
 
