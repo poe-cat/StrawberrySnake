@@ -11,8 +11,8 @@ public class DesktopLauncher {
 
 		config.resizable = false;
 		//window size
-		config.width = 420;  //660?
-		config.height = 225;
+		config.width = 840;
+		config.height = 450;
 
 		config.title = "Strawberry Snake";
 
