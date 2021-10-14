@@ -58,7 +58,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 		runningGame();
 
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
