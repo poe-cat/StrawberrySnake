@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,6 +26,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	BitmapFont bitmapFont;
 
 	Sound sound;
+	Music music;
 
 	private String gameOverStr;
 	BitmapFont gameOverFont;
@@ -37,7 +39,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		yourScore = "score: 0";
 		bitmapFont = new BitmapFont();
 
-		sound = Gdx.audio.newSound(Gdx.files.internal("core/assets/8bit_bg.mp3"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("core/assets/8bit_bg.mp3"));
 
 		batch = new SpriteBatch();
 		snakeImg = new Texture("pinkSnake.png");
@@ -63,7 +65,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 		runningGame();
 
-		sound.play(0.5f);
+		music.play();
 
 
 		Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
@@ -115,6 +117,6 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		//release texture (snake is moving on, strawberry is eaten)
 		snakeImg.dispose();
 		strawImg.dispose();
-		sound.play(0.5f);
+		music.dispose();
 	}
 }
