@@ -18,8 +18,6 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	private Texture snakeImg;
 	private Texture strawImg;
 
-	String gupiBla;
-
 	private Snake snake;
 	private Strawberry strawberry;
 	private boolean gameOver;
