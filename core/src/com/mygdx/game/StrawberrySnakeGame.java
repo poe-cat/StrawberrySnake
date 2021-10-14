@@ -25,7 +25,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	private String yourScore;
 	BitmapFont bitmapFont;
 
-	Sound sound;
+	Sound soundNom;
 	Music music;
 
 	private String gameOverStr;
@@ -40,6 +40,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		bitmapFont = new BitmapFont();
 
 		music = Gdx.audio.newMusic(Gdx.files.internal("core/assets/8bit_bg.mp3"));
+		soundNom = Gdx.audio.newSound(Gdx.files.internal("core/assets/eat_food.mp3"));
 
 		batch = new SpriteBatch();
 		snakeImg = new Texture("pinkSnake.png");
@@ -67,7 +68,6 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 		music.play();
 
-
 		Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -93,6 +93,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 			//if head has the same pos as strawberry,
 			// snake extends and new food randomly appears
 			if (snake.isStrawAboard(strawberry.getPosition())) {
+				soundNom.play();
 				snake.extendSnake();
 				score++;
 				yourScore = "score: " + score;
@@ -117,6 +118,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		//release texture (snake is moving on, strawberry is eaten)
 		snakeImg.dispose();
 		strawImg.dispose();
+		soundNom.dispose();
 		music.dispose();
 	}
 }
