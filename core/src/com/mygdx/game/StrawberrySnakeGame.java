@@ -26,6 +26,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	BitmapFont bitmapFont;
 
 	Sound soundNom;
+	Sound soundCrash;
 	Music music;
 
 	private String gameOverStr;
@@ -41,6 +42,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 		music = Gdx.audio.newMusic(Gdx.files.internal("core/assets/8bit_bg.mp3"));
 		soundNom = Gdx.audio.newSound(Gdx.files.internal("core/assets/eat_food.mp3"));
+		soundCrash = Gdx.audio.newSound(Gdx.files.internal("core/assets/crash.ogg"));
 
 		batch = new SpriteBatch();
 		snakeImg = new Texture("pinkSnake.png");
@@ -101,6 +103,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 			}
 
 			if (snake.isHeUroboros()) {
+				soundCrash.play();
 				gameOver = true;
 				System.out.println("GAME OVER\nPRESS ENTER TO PLAY AGAIN");
 			}
@@ -119,6 +122,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		snakeImg.dispose();
 		strawImg.dispose();
 		soundNom.dispose();
+		soundCrash.dispose();
 		music.dispose();
 	}
 }
