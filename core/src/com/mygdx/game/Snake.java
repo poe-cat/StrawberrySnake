@@ -107,7 +107,7 @@ public class Snake {
             move();
         }
 
-        //
+        determineTailDirection();
     }
 
 
@@ -151,10 +151,18 @@ public class Snake {
 
         //draw snake's tail
         GridPoint2 tail = snakeParts.get(tailIndex());
-        batch.draw(tailTexture)
+        batch.draw(
+                tailTexture[tailDirection.ordinal()],
+                tail.x,
+                tail.y
+        );
 
-
-
+        //draw snake's head
+        batch.draw(
+                headTexture[direction.ordinal()],
+                snakeHead().x,
+                snakeHead().y
+        );
     }
 
     private TextureRegion getTexturePart(Texture texture, int index) {
