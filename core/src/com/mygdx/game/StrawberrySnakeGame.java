@@ -12,7 +12,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
+
 public class StrawberrySnakeGame extends ApplicationAdapter {
+
+	public enum State {
+		PAUSE,
+		RUN,
+		RESUME,
+		STOPPED
+	}
 
 	private SpriteBatch batch;
 	private Texture snakeImg;
@@ -29,7 +37,6 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	Sound soundNom;
 	Sound soundCrash;
 	Music music;
-
 
 	@Override
 	public void create() {
@@ -63,6 +70,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
+
 
 		runningGame();
 
