@@ -79,7 +79,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 		//display score
 		bitmapFont.setColor(Color.YELLOW);
-		bitmapFont.draw(batch, yourScore, 400, 440);
+		bitmapFont.draw(batch, yourScore, 10, 440);
 
 		batch.end();
 	}
@@ -103,7 +103,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 			if (snake.isHeUroboros()) {
 				soundCrash.play();
 				gameOver = true;
-				System.out.println("GAME OVER\nPRESS ENTER TO PLAY AGAIN");
+				yourScore = "GAME OVER\npress ENTER to play again\nfinal score: " + score;
 			}
 		} else {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -116,7 +116,6 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	public void dispose() {
 		batch.dispose();
 
-		//release texture (snake is moving on, strawberry is eaten)
 		snakeImg.dispose();
 		strawImg.dispose();
 		soundNom.dispose();
