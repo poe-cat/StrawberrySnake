@@ -1,9 +1,6 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -16,15 +13,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StrawberrySnakeGame extends Game {
 
-	//will handle it later
-	public enum State {
-		PAUSE,
-		RUN,
-		RESUME,
-		STOPPED
-	}
-
-	private State state = State.RUN;
+//	public enum State {
+//		PAUSE,
+//		RUN,
+//		RESUME,
+//		STOPPED
+//	}
+//
+//	private State state = State.RUN;
 
 	private SpriteBatch batch;
 	private Texture snakeImg;
@@ -43,6 +39,7 @@ public class StrawberrySnakeGame extends Game {
 	Music music;
 
 	boolean paused;
+
 
 	@Override
 	public void create() {
