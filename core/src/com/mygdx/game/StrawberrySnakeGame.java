@@ -115,6 +115,22 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 					batch.end();
 
 					break;
+
+				case RESUME:
+					Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
+					Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+					batch.begin();
+
+					//drawing snake and strawberry
+					snake.draw(batch);
+					strawberry.draw(batch);
+
+					//display score
+					bitmapFont.setColor(Color.YELLOW);
+					bitmapFont.draw(batch, yourScore, 10, 440);
+
+					batch.end();
 				default:
 					break;
 			}
@@ -135,10 +151,12 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 				yourScore = "score: " + score;
 				strawberry.randomizeFoodPos();
 			} else {
-				if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+				if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 					pause();
-
+				}
 			}
+
+
 
 			if (snake.isHeUroboros()) {
 				soundCrash.play();
@@ -155,6 +173,11 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 	@Override
 	public void pause() {
 		this.state = State.PAUSE;
+	}
+
+	@Override
+	public void resume() {
+		this.state = State.RESUME;
 	}
 
 	@Override
