@@ -15,15 +15,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StrawberrySnakeGame extends ApplicationAdapter {
 
-	public enum State {
-		PAUSE,
-		RUN,
-		RESUME,
-		STOPPED
-	}
-
-	private State state = State.RUN;
-
 	private SpriteBatch batch;
 	private Texture snakeImg;
 	private Texture strawImg;
