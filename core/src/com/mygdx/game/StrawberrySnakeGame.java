@@ -79,6 +79,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 		if(paused){
 			if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 				paused = false;
+				music.pause();
 				try {
 					Thread.sleep(100);
 				} catch(InterruptedException e) {
@@ -111,6 +112,7 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			paused = true;
+			music.pause();
 			try {
 				Thread.sleep(100);
 			}catch(InterruptedException e) {
