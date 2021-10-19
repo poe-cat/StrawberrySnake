@@ -15,6 +15,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StrawberrySnakeGame extends ApplicationAdapter {
 
+	//will handle it later
+	public enum State {
+		PAUSE,
+		RUN,
+		RESUME,
+		STOPPED
+	}
+
+	private State state = State.RUN;
+
 	private SpriteBatch batch;
 	private Texture snakeImg;
 	private Texture strawImg;
@@ -108,7 +118,6 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 			}
 		}
 
-
 		if (!gameOver) {
 			snake.act(Gdx.graphics.getDeltaTime());
 
@@ -132,6 +141,16 @@ public class StrawberrySnakeGame extends ApplicationAdapter {
 				initNewGame();
 			}
 		}
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
 	}
 
 	@Override
