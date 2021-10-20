@@ -4,7 +4,10 @@ import com.badlogic.gdx.Screen;
 
 public class GameScreen implements Screen {
 
+    StrawberrySnakeGame game;
+
     public GameScreen(StrawberrySnakeGame game) {
+        this.game = game;
     }
 
     @Override
