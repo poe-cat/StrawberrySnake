@@ -9,7 +9,7 @@ public class TitleScreen extends ScreenAdapter {
 
     StrawberrySnakeGame game;
 
-    TitleScreen(StrawberrySnakeGame game) {
+    public TitleScreen(StrawberrySnakeGame game) {
         this.game = game;
     }
 
@@ -19,11 +19,16 @@ public class TitleScreen extends ScreenAdapter {
 
             @Override
             public boolean keyDown(int keyCode) {
-                if (keyCode == Input.Keys.P) {
+                if (keyCode == Input.Keys.ENTER) {
                     game.setScreen(new GameScreen(game));
                 }
                 return true;
             }
         });
+    }
+
+    @Override
+    public void hide(){
+        Gdx.input.setInputProcessor(null);
     }
 }
