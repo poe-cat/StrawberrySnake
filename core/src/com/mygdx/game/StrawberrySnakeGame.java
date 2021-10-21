@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
@@ -21,6 +22,9 @@ public class StrawberrySnakeGame extends Game {
 //	}
 //
 //	private State state = State.RUN;
+
+	public static Texture backgroundTexture;
+	public static Sprite backgroundSprite;
 
 	private SpriteBatch batch;
 	private Texture snakeImg;
@@ -53,6 +57,11 @@ public class StrawberrySnakeGame extends Game {
 		soundCrash = Gdx.audio.newSound(Gdx.files.internal("core/assets/crash.ogg"));
 
 		batch = new SpriteBatch();
+
+		//background image
+		backgroundTexture = new Texture("grass.jpg");
+		backgroundSprite = new Sprite(backgroundTexture);
+
 		snakeImg = new Texture("pinkSnake.png");
 		strawImg = new Texture("straw2.png");
 
@@ -93,6 +102,9 @@ public class StrawberrySnakeGame extends Game {
 					Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 					batch.begin();
+
+					//draw background image
+					backgroundSprite.draw(batch);
 
 					//drawing snake and strawberry
 					snake.draw(batch);
