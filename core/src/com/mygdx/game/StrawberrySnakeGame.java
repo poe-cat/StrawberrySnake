@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StrawberrySnakeGame extends Game {
 
+	//game states - for future update
 //	public enum State {
 //		PAUSE,
 //		RUN,
@@ -85,29 +86,30 @@ public class StrawberrySnakeGame extends Game {
 				}
 			}
 		} else
-					runningGame();
+			runningGame();
 
-					music.play();
+			music.play();
 
-					Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
-					Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-					batch.begin();
+			batch.begin();
 
-					//drawing snake and strawberry
-					snake.draw(batch);
-					strawberry.draw(batch);
+			//drawing snake and strawberry
+			snake.draw(batch);
+			strawberry.draw(batch);
 
-					//display score
-					bitmapFont.setColor(Color.YELLOW);
-					bitmapFont.draw(batch, yourScore, 10, 440);
+			//display score
+			bitmapFont.setColor(Color.YELLOW);
+			bitmapFont.draw(batch, yourScore, 10, 440);
 
-					batch.end();
+			batch.end();
 			}
 
 	//game logic
 	private void runningGame() {
 
+		//press space to pause and unpause
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			paused = true;
 			music.pause();
