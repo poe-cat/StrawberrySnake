@@ -59,7 +59,7 @@ public class StrawberrySnakeGame extends Game {
 		batch = new SpriteBatch();
 
 		//background image
-		backgroundTexture = new Texture("grass.jpg");
+		backgroundTexture = new Texture("background.jpg");
 		backgroundSprite = new Sprite(backgroundTexture);
 
 		snakeImg = new Texture("pinkSnake.png");
