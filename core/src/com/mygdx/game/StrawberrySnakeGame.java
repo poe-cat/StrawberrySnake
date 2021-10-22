@@ -29,9 +29,12 @@ public class StrawberrySnakeGame extends Game {
 	private SpriteBatch batch;
 	private Texture snakeImg;
 	private Texture strawImg;
+	private Texture heartImg;
 
 	private Snake snake;
 	private Strawberry strawberry;
+	private Heart heart;
+
 	private boolean gameOver;
 
 	private int score;
@@ -65,8 +68,11 @@ public class StrawberrySnakeGame extends Game {
 		snakeImg = new Texture("pinkSnake.png");
 		strawImg = new Texture("straw2.png");
 
+		heartImg = new Texture("heart.png");
+
 		snake = new Snake(snakeImg);
 		strawberry = new Strawberry(strawImg);
+		heart = new Heart(heartImg);
 
 		initNewGame();
 	}
@@ -109,6 +115,8 @@ public class StrawberrySnakeGame extends Game {
 					//drawing snake and strawberry
 					snake.draw(batch);
 					strawberry.draw(batch);
+
+					heart.draw(batch);
 
 					//display score
 					bitmapFont.setColor(Color.YELLOW);
@@ -171,6 +179,7 @@ public class StrawberrySnakeGame extends Game {
 
 		snakeImg.dispose();
 		strawImg.dispose();
+		heartImg.dispose();
 		soundNom.dispose();
 		soundCrash.dispose();
 		music.dispose();
