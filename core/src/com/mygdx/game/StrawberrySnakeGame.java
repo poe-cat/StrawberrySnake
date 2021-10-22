@@ -150,6 +150,19 @@ public class StrawberrySnakeGame extends Game {
 			}
 		}
 
+		if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+			Gdx.input.setInputProcessor(new InputAdapter() {
+				@Override
+				public boolean keyDown(int keyCode) {
+					if (keyCode == Input.Keys.S) {
+						music.stop();
+					}
+					return true;
+				}
+			});
+		}
+
+
 		if (!gameOver) {
 			snake.act(Gdx.graphics.getDeltaTime());
 
@@ -178,6 +191,23 @@ public class StrawberrySnakeGame extends Game {
 			}
 		}
 	}
+
+
+//	public void mute() {
+//		Gdx.input.setInputProcessor(new InputAdapter() {
+//			@Override
+//			public boolean keyDown(int keyCode) {
+//				if (keyCode == Input.Keys.S) {
+//					music.stop();
+//					soundCrash.stop();
+//					soundNom.stop();
+//				}
+//				return true;
+//			}
+//		});
+//	}
+
+
 
 
 	@Override
