@@ -29,12 +29,13 @@ public class StrawberrySnakeGame extends Game {
 	private SpriteBatch batch;
 	private Texture snakeImg;
 	private Texture strawImg;
-	private Texture heartImg;
-	private Texture emptyheartImg;
+	private Texture heartImg, emptyheartImg;
+	private Texture gameOverImg, gameOverImg2;
 
 	private Snake snake;
 	private Strawberry strawberry;
 	private Heart heart;
+	private GameOver gOver;
 
 	private boolean gameOver;
 
@@ -72,9 +73,14 @@ public class StrawberrySnakeGame extends Game {
 		heartImg = new Texture("heart.png");
 		emptyheartImg = new Texture("emptyheart.png");
 
+		gameOverImg = new Texture("blank.png");
+		gameOverImg2 = new Texture("333.png");
+
 		snake = new Snake(snakeImg);
 		strawberry = new Strawberry(strawImg);
 		heart = new Heart(heartImg);
+
+		gOver = new GameOver(gameOverImg);
 
 		initNewGame();
 	}
@@ -86,6 +92,7 @@ public class StrawberrySnakeGame extends Game {
 		yourScore = "score: 0";
 		//fill heart again
 		heart = new Heart(heartImg);
+		gOver = new GameOver(gameOverImg);
 		strawberry.randomizeFoodPos();
 		gameOver = false;
 	}
@@ -106,27 +113,28 @@ public class StrawberrySnakeGame extends Game {
 		} else
 			runningGame();
 
-		music.play();
+		    music.play();
 
-		Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		    Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
+		    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		batch.begin();
+		    batch.begin();
 
-		//draw background image
-		backgroundSprite.draw(batch);
+		    //draw background image
+		    backgroundSprite.draw(batch);
 
-		//drawing snake and strawberry
-		snake.draw(batch);
-		strawberry.draw(batch);
+		    //drawing snake and strawberry
+		    snake.draw(batch);
+		    strawberry.draw(batch);
 
-		heart.draw(batch);
+		    heart.draw(batch);
+		    gOver.draw(batch);
 
-		//display score
-		bitmapFont.setColor(Color.YELLOW);
-		bitmapFont.draw(batch, yourScore, 10, 440);
+		    //display score
+		    bitmapFont.setColor(Color.YELLOW);
+		    bitmapFont.draw(batch, yourScore, 10, 440);
 
-		batch.end();
+		    batch.end();
 	}
 
 
@@ -159,8 +167,10 @@ public class StrawberrySnakeGame extends Game {
 			if (snake.isHeUroboros()) {
 				soundCrash.play();
 				gameOver = true;
-				yourScore = "GAME OVER\npress ENTER to play again\nfinal score: " + score;
+				yourScore = "press ENTER to play again\n\nfinal score: " + score;
 				heart = new Heart(emptyheartImg);
+				gOver = new GameOver(gameOverImg2);
+
 			}
 		} else {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -186,6 +196,7 @@ public class StrawberrySnakeGame extends Game {
 		snakeImg.dispose();
 		strawImg.dispose();
 		heartImg.dispose();
+		gameOverImg.dispose();
 		soundNom.dispose();
 		soundCrash.dispose();
 		music.dispose();
