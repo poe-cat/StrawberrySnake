@@ -150,6 +150,7 @@ public class StrawberrySnakeGame extends Game {
 			}
 		}
 
+		//mute music when S is pressed
 		if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 			Gdx.input.setInputProcessor(new InputAdapter() {
 				@Override
