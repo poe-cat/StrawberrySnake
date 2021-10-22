@@ -167,7 +167,7 @@ public class StrawberrySnakeGame extends Game {
 			if (snake.isHeUroboros()) {
 				soundCrash.play();
 				gameOver = true;
-				yourScore = "press ENTER to play again\n\nfinal score: " + score;
+				yourScore = "final score: " + score;
 				heart = new Heart(emptyheartImg);
 				gOver = new GameOver(gameOverImg2);
 
