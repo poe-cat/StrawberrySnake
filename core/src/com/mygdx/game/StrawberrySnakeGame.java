@@ -88,6 +88,7 @@ public class StrawberrySnakeGame extends Game {
 	//start new game after game over
 	private void initNewGame() {
 		snake.initialize();
+		music.play();
 		score = 0;
 		yourScore = "score: 0";
 		//fill heart again
@@ -103,7 +104,7 @@ public class StrawberrySnakeGame extends Game {
 		if(paused){
 			if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 				paused = false;
-				music.pause();
+				music.play();
 				try {
 					Thread.sleep(100);
 				} catch(InterruptedException e) {
@@ -112,8 +113,6 @@ public class StrawberrySnakeGame extends Game {
 			}
 		} else
 			runningGame();
-
-		    music.play();
 
 		    Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
 		    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -170,6 +169,7 @@ public class StrawberrySnakeGame extends Game {
 				yourScore = "final score: " + score;
 				heart = new Heart(emptyheartImg);
 				gOver = new GameOver(gameOverImg2);
+				music.stop();
 
 			}
 		} else {
@@ -179,15 +179,6 @@ public class StrawberrySnakeGame extends Game {
 		}
 	}
 
-	@Override
-	public void pause() {
-
-	}
-
-	@Override
-	public void resume() {
-
-	}
 
 	@Override
 	public void dispose() {
