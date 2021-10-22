@@ -84,6 +84,8 @@ public class StrawberrySnakeGame extends Game {
 		snake.initialize();
 		score = 0;
 		yourScore = "score: 0";
+		//fill heart again
+		heart = new Heart(heartImg);
 		strawberry.randomizeFoodPos();
 		gameOver = false;
 	}
