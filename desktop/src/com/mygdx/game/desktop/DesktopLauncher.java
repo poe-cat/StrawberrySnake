@@ -10,10 +10,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
 		config.resizable = false;
-		//window size
 		config.width = 840;
 		config.height = 450;
-
 		config.title = "Strawberry Snake";
 
 		new LwjglApplication(new StrawberrySnakeGame(), config);
