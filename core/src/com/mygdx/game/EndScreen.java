@@ -16,20 +16,33 @@ public class EndScreen implements Screen {
 
     @Override
     public void show() {
+
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keyCode) {
 
-                if (keyCode == Input.Keys.Q) {
+                if (keyCode == Input.Keys.ENTER) {
                     game.setScreen(new TitleScreen(game));
+                }
+                else if(keyCode == Input.Keys.F1) {
+                    System.exit(0);
                 }
                 return true;
             }
         });
+
     }
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        game.batch.begin();
+        game.bitmapFont.draw(game.batch, "GAME OVER", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
+        game.bitmapFont.draw(game.batch, "Press ENTER to restart", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
+        game.bitmapFont.draw(game.batch, "Press F1 to exit", Gdx.graphics.getWidth() * .50f, Gdx.graphics.getHeight() * .25f);
+        game.batch.end();
 
     }
 

@@ -52,8 +52,9 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keyCode) {
-                if (keyCode == Input.Keys.F1) {
+                if (keyCode == Input.Keys.ESCAPE) {
                     game.setScreen(new EndScreen(game));
+                    music.stop();
                 }
                 return true;
             }
