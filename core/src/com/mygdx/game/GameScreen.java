@@ -49,6 +49,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+
+        //press ESC to show end screen
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keyCode) {
@@ -95,6 +97,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
+        //unpause with SPACE (probably shouldn't be here)
         if(paused){
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 paused = false;
@@ -130,32 +133,7 @@ public class GameScreen implements Screen {
         batch.end();
     }
 
-
     private void runningGame() {
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            paused = true;
-            music.pause();
-            try {
-                Thread.sleep(100);
-            }catch(InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //mute music when S is pressed
-        if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            Gdx.input.setInputProcessor(new InputAdapter() {
-                @Override
-                public boolean keyDown(int keyCode) {
-                    if (keyCode == Input.Keys.S) {
-                        music.stop();
-                    }
-                    return true;
-                }
-            });
-        }
-
 
         if (!gameOver) {
             snake.act(Gdx.graphics.getDeltaTime());
@@ -170,6 +148,7 @@ public class GameScreen implements Screen {
                 strawberry.randomizeFoodPos();
             }
 
+            //snake has eaten own tail...
             if (snake.isHeUroboros()) {
                 soundCrash.play();
                 gameOver = true;
@@ -180,8 +159,24 @@ public class GameScreen implements Screen {
 
             }
         } else {
-            if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
                 initNewGame();
+            }
+        }
+
+        //press S to mute music
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+            music.stop();
+        }
+
+        //to pause press SPACE (to unpause press again)
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            paused = true;
+            music.pause();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
