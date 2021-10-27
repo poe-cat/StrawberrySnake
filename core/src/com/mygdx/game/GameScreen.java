@@ -6,6 +6,8 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -92,6 +94,108 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
+        if(paused){
+            if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                paused = false;
+                music.play();
+                try {
+                    Thread.sleep(100);
+                } catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else
+            runningGame();
+
+        Gdx.gl.glClearColor(.1f, 0.4f, 0.6f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+
+        //draw background image
+        backgroundSprite.draw(batch);
+
+        //drawing snake and strawberry
+        snake.draw(batch);
+        strawberry.draw(batch);
+
+        heart.draw(batch);
+        gOver.draw(batch);
+
+        //display score
+        bitmapFont.setColor(Color.YELLOW);
+        bitmapFont.draw(batch, yourScore, 10, 440);
+
+        batch.end();
+    }
+
+
+    private void runningGame() {
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            paused = true;
+            music.pause();
+            try {
+                Thread.sleep(100);
+            }catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //mute music when S is pressed
+        if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+            Gdx.input.setInputProcessor(new InputAdapter() {
+                @Override
+                public boolean keyDown(int keyCode) {
+                    if (keyCode == Input.Keys.S) {
+                        music.stop();
+                    }
+                    return true;
+                }
+            });
+        }
+
+
+        if (!gameOver) {
+            snake.act(Gdx.graphics.getDeltaTime());
+
+            //if head has the same pos as strawberry,
+            // snake extends and new food randomly appears
+            if (snake.isStrawAboard(strawberry.getPosition())) {
+                soundNom.play();
+                snake.extendSnake();
+                score++;
+                yourScore = "score: " + score;
+                strawberry.randomizeFoodPos();
+            }
+
+            if (snake.isHeUroboros()) {
+                soundCrash.play();
+                gameOver = true;
+                yourScore = "final score: " + score;
+                heart = new Heart(emptyheartImg);
+                gOver = new GameOver(gameOverImg2);
+                music.stop();
+
+            }
+        } else {
+            if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+                initNewGame();
+            }
+        }
+    }
+
+    private void initNewGame() {
+
+        snake.initialize();
+        music.play();
+        score = 0;
+        yourScore = "score: 0";
+        //fill heart again
+        heart = new Heart(heartImg);
+        gOver = new GameOver(gameOverImg);
+        strawberry.randomizeFoodPos();
+        gameOver = false;
     }
 
     @Override
@@ -116,6 +220,13 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        batch.dispose();
+        snakeImg.dispose();
+        strawImg.dispose();
+        heartImg.dispose();
+        gameOverImg.dispose();
+        soundNom.dispose();
+        soundCrash.dispose();
+        music.dispose();
     }
 }
