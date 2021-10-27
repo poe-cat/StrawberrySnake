@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 
 public class EndScreen implements Screen {
@@ -39,6 +40,8 @@ public class EndScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
+        game.bitmapFont.setColor(Color.PINK);
+        game.bitmapFont.getData().setScale(1,1);
         game.bitmapFont.draw(game.batch, "GAME OVER", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
         game.bitmapFont.draw(game.batch, "Are you sure you want to exit?", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
         game.bitmapFont.draw(game.batch, "Y / N", Gdx.graphics.getWidth() * .50f, Gdx.graphics.getHeight() * .25f);
