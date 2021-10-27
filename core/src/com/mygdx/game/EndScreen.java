@@ -21,10 +21,10 @@ public class EndScreen implements Screen {
             @Override
             public boolean keyDown(int keyCode) {
 
-                if (keyCode == Input.Keys.ENTER) {
+                if (keyCode == Input.Keys.N) {
                     game.setScreen(new TitleScreen(game));
                 }
-                else if(keyCode == Input.Keys.F1) {
+                else if(keyCode == Input.Keys.Y) {
                     System.exit(0);
                 }
                 return true;
@@ -40,8 +40,8 @@ public class EndScreen implements Screen {
 
         game.batch.begin();
         game.bitmapFont.draw(game.batch, "GAME OVER", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
-        game.bitmapFont.draw(game.batch, "Press ENTER to restart", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
-        game.bitmapFont.draw(game.batch, "Press F1 to exit", Gdx.graphics.getWidth() * .50f, Gdx.graphics.getHeight() * .25f);
+        game.bitmapFont.draw(game.batch, "Are you sure you want to exit?", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
+        game.bitmapFont.draw(game.batch, "Y / N", Gdx.graphics.getWidth() * .50f, Gdx.graphics.getHeight() * .25f);
         game.batch.end();
 
     }
