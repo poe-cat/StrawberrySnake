@@ -26,7 +26,7 @@ public class StrawberrySnakeGame extends Game {
 	public static Texture backgroundTexture;
 	public static Sprite backgroundSprite;
 
-	private SpriteBatch batch;
+	SpriteBatch batch;
 	private Texture snakeImg;
 	private Texture strawImg;
 	private Texture heartImg, emptyheartImg;
