@@ -36,9 +36,16 @@ public class TitleScreen extends ScreenAdapter {
         game.batch.begin();
         game.bitmapFont.setColor(Color.PINK);
         game.bitmapFont.getData().setScale(1,1);
-        game.bitmapFont.draw(game.batch, "Strawberry Snake", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
-        game.bitmapFont.draw(game.batch, "use arrows to chase the strawberry", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .5f);
-        game.bitmapFont.draw(game.batch, "press ENTER to play", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
+
+        game.bitmapFont.draw(game.batch, "Strawberry Snake",
+                Gdx.graphics.getWidth() * .40f, Gdx.graphics.getHeight() * .75f);
+
+        game.bitmapFont.draw(game.batch, "use arrows to chase the strawberry",
+                Gdx.graphics.getWidth() * .34f, Gdx.graphics.getHeight() * .65f);
+
+        game.bitmapFont.draw(game.batch, "ENTER - play\nSPACE - pause\nS - mute music\nESC - end game",
+                Gdx.graphics.getWidth() * .41f, Gdx.graphics.getHeight() * .50f);
+
         game.batch.end();
     }
 
