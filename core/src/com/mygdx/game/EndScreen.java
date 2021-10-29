@@ -42,9 +42,8 @@ public class EndScreen implements Screen {
         game.batch.begin();
         game.bitmapFont.setColor(Color.PINK);
         game.bitmapFont.getData().setScale(1,1);
-        game.bitmapFont.draw(game.batch, "GAME OVER", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
-        game.bitmapFont.draw(game.batch, "Are you sure you want to exit?", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
-        game.bitmapFont.draw(game.batch, "Y / N", Gdx.graphics.getWidth() * .50f, Gdx.graphics.getHeight() * .25f);
+        game.bitmapFont.draw(game.batch, "GAME OVER", Gdx.graphics.getWidth() * .45f, Gdx.graphics.getHeight() * .75f);
+        game.bitmapFont.draw(game.batch, "Are you sure you want to exit?    Y / N  ", Gdx.graphics.getWidth() * .35f, Gdx.graphics.getHeight() * .65f);
         game.batch.end();
 
     }
