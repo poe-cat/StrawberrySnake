@@ -21,7 +21,6 @@ public class Strawberry {
 
     //randomize the food position
     public void randomizeFoodPos() {
-
         //number of possible x&y positions in the game window
         int numOfXPositions =
                 Gdx.graphics.getWidth() / texture.getWidth();

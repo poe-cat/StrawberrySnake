@@ -17,7 +17,6 @@ public class EndScreen implements Screen {
 
     @Override
     public void show() {
-
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keyCode) {
@@ -31,7 +30,6 @@ public class EndScreen implements Screen {
                 return true;
             }
         });
-
     }
 
     @Override
@@ -45,23 +43,16 @@ public class EndScreen implements Screen {
         game.bitmapFont.draw(game.batch, "GAME OVER", Gdx.graphics.getWidth() * .45f, Gdx.graphics.getHeight() * .75f);
         game.bitmapFont.draw(game.batch, "Are you sure you want to exit?    Y / N  ", Gdx.graphics.getWidth() * .35f, Gdx.graphics.getHeight() * .65f);
         game.batch.end();
-
     }
 
     @Override
-    public void resize(int width, int height) {
-
-    }
+    public void resize(int width, int height) {}
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() {}
 
     @Override
     public void hide() {
@@ -69,7 +60,5 @@ public class EndScreen implements Screen {
     }
 
     @Override
-    public void dispose() {
-
-    }
+    public void dispose() {}
 }

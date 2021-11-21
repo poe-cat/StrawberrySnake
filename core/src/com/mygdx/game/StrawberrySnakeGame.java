@@ -12,7 +12,6 @@ public class StrawberrySnakeGame extends Game {
 
 		@Override
 		public void create() {
-
 			bitmapFont = new BitmapFont();
 			batch = new SpriteBatch();
 

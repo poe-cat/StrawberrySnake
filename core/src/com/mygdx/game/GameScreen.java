@@ -16,11 +16,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameScreen implements Screen {
 
     StrawberrySnakeGame game;
-
     public static Texture backgroundTexture;
     public static Sprite backgroundSprite;
-
     SpriteBatch batch;
+
     private Texture snakeImg;
     private Texture strawImg;
     private Texture heartImg, emptyheartImg;
@@ -32,6 +31,7 @@ public class GameScreen implements Screen {
     private GameOver gOver;
 
     private boolean gameOver;
+    boolean paused;
 
     private int score;
     private String yourScore;
@@ -41,15 +41,12 @@ public class GameScreen implements Screen {
     Sound soundCrash;
     Music music;
 
-    boolean paused;
-
     public GameScreen(StrawberrySnakeGame game) {
         this.game = game;
     }
 
     @Override
     public void show() {
-
         //press ESC to show end screen
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
@@ -73,7 +70,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
 
         //background image
-        backgroundTexture = new Texture("background.jpg");
+        backgroundTexture = new Texture("mint-green-background.jpg");
         backgroundSprite = new Sprite(backgroundTexture);
 
         snakeImg = new Texture("pinkSnake.png");
@@ -96,7 +93,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
         //unpause with SPACE (probably shouldn't be here)
         if(paused){
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
@@ -115,26 +111,20 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-
         //draw background image
         backgroundSprite.draw(batch);
-
         //drawing snake and strawberry
         snake.draw(batch);
         strawberry.draw(batch);
-
         heart.draw(batch);
         gOver.draw(batch);
-
         //display score
         bitmapFont.setColor(Color.YELLOW);
         bitmapFont.draw(batch, yourScore, 10, 440);
-
         batch.end();
     }
 
     private void runningGame() {
-
         if (!gameOver) {
             snake.act(Gdx.graphics.getDeltaTime());
 
@@ -156,7 +146,6 @@ public class GameScreen implements Screen {
                 heart = new Heart(emptyheartImg);
                 gOver = new GameOver(gameOverImg2);
                 music.stop();
-
             }
         } else {
             if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -182,7 +171,6 @@ public class GameScreen implements Screen {
     }
 
     private void initNewGame() {
-
         snake.initialize();
         music.play();
         score = 0;
@@ -195,19 +183,13 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
-
-    }
+    public void resize(int width, int height) {}
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() {}
 
     @Override
     public void hide() {

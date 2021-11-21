@@ -49,7 +49,6 @@ public class TitleScreen extends ScreenAdapter {
         game.batch.end();
     }
 
-
     @Override
     public void hide(){
         Gdx.input.setInputProcessor(null);
