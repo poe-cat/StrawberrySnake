@@ -9,9 +9,6 @@ public class Heart {
 
     private final Texture texture;
 
-    //hearts should be snake-like?
-    //private final TextureRegion heartTexture;
-
     public Heart(Texture texture) {
         this.texture = texture;
 

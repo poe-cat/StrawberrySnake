@@ -47,7 +47,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        //press ESC to show end screen
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keyCode) {
@@ -69,7 +68,6 @@ public class GameScreen implements Screen {
 
         batch = new SpriteBatch();
 
-        //background image
         backgroundTexture = new Texture("mint-green-background.jpg");
         backgroundSprite = new Sprite(backgroundTexture);
 
@@ -93,7 +91,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        //unpause with SPACE (probably shouldn't be here)
         if(paused){
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 paused = false;
@@ -111,14 +108,11 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        //draw background image
         backgroundSprite.draw(batch);
-        //drawing snake and strawberry
         snake.draw(batch);
         strawberry.draw(batch);
         heart.draw(batch);
         gOver.draw(batch);
-        //display score
         bitmapFont.setColor(Color.YELLOW);
         bitmapFont.draw(batch, yourScore, 10, 440);
         batch.end();
@@ -128,8 +122,6 @@ public class GameScreen implements Screen {
         if (!gameOver) {
             snake.act(Gdx.graphics.getDeltaTime());
 
-            //if head has the same pos as strawberry,
-            // snake extends and new food randomly appears
             if (snake.isStrawAboard(strawberry.getPosition())) {
                 soundNom.play();
                 snake.extendSnake();
@@ -138,7 +130,6 @@ public class GameScreen implements Screen {
                 strawberry.randomizeFoodPos();
             }
 
-            //snake has eaten own tail...
             if (snake.isHeUroboros()) {
                 soundCrash.play();
                 gameOver = true;
@@ -153,12 +144,10 @@ public class GameScreen implements Screen {
             }
         }
 
-        //press S to mute music
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             music.stop();
         }
 
-        //to pause press SPACE (to unpause press again)
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             paused = true;
             music.pause();
